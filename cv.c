@@ -51,12 +51,12 @@
 #include "sizes.h"
 #include "hlist.h"
 
-char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "cat",
-    "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "sha1sum",
-    "sha224sum", "sha256sum", "sha384sum", "sha512sum", NULL
+char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "zip", "unzip", "cat", "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "md5", "sha1sum", "shasum", "shasum5.16", "shasum5.18", "sha224sum", "sha256sum", "sha384sum", "sha512sum","perl5.16", "perl5.18", "adb", NULL
 };
 
-char *proc_specifiq_name = NULL;
+static int proc_specifiq_name_cnt;
+static char **proc_specifiq_name;
+
 pid_t proc_specifiq_pid = 0;
 signed char flag_quiet = 0;
 signed char flag_debug = 0;
@@ -502,7 +502,9 @@ while(1) {
             break;
 
         case 'c':
-            proc_specifiq_name = strdup(optarg);
+            proc_specifiq_name_cnt++;
+            proc_specifiq_name = realloc(proc_specifiq_name, proc_specifiq_name_cnt * sizeof(proc_specifiq_name[0]));
+            proc_specifiq_name[proc_specifiq_name_cnt - 1] = strdup(optarg);
             break;
 
         case 'p':
@@ -597,10 +599,11 @@ signed char search_all = 1;
 
 pid_count = 0;
 
-if (proc_specifiq_name) {
-    pid_count += find_pids_by_binary_name(proc_specifiq_name,
-                                          pidinfo_list + pid_count,
-                                          MAX_PIDS - pid_count);
+if (proc_specifiq_name_cnt) {
+    for (i = 0; i < proc_specifiq_name_cnt; ++i)
+        pid_count += find_pids_by_binary_name(proc_specifiq_name[i],
+                                              pidinfo_list + pid_count,
+                                              MAX_PIDS - pid_count);
     search_all = 0;
 }
 
