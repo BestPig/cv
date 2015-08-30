@@ -59,8 +59,12 @@
 #include "sizes.h"
 #include "hlist.h"
 
+<<<<<<< Updated upstream
 char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "zip", "unzip", "7z", "cat", "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "md5", "sha1sum", "shasum", "shasum5.16", "shasum5.18", "sha224sum", "sha256sum", "sha384sum", "sha512sum","perl5.16", "perl5.18", "adb", NULL
 };
+=======
+char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "zip", "unzip", "cat", "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "md5", "sha1sum", "shasum", "shasum5.16", "shasum5.18", "sha224sum", "sha256sum", "sha384sum", "sha512sum","perl5.16", "perl5.18", "adb", NULL };
+>>>>>>> Stashed changes
 
 static int proc_specifiq_name_cnt;
 static char **proc_specifiq_name;
