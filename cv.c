@@ -43,11 +43,11 @@
 # include <sys/proc_info.h>
 # include <libproc.h>
 # include <sys/disk.h>
-#elif __linux
+#elif __linux__
 # include <linux/fs.h>
-#elif __uinx
+#elif __uinx__
 //#include
-#elif __FreeBSD
+#elif __FreeBSD__
 //#include
 #elif _WIN32
 //#include
