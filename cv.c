@@ -43,15 +43,23 @@
 # include <sys/proc_info.h>
 # include <libproc.h>
 # include <sys/disk.h>
-#else
+#elif __linux
 # include <linux/fs.h>
+#elif __uinx
+//#include
+#elif __FreeBSD
+//#include
+#elif _WIN32
+//#include
+#elif _WIN64
+//#include
 #endif
 
 #include "cv.h"
 #include "sizes.h"
 #include "hlist.h"
 
-char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "zip", "unzip", "cat", "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "md5", "sha1sum", "shasum", "shasum5.16", "shasum5.18", "sha224sum", "sha256sum", "sha384sum", "sha512sum","perl5.16", "perl5.18", "adb", NULL
+char *proc_names[] = {"cp", "mv", "dd", "tar", "gzip", "gunzip", "zip", "unzip", "7z", "cat", "grep", "fgrep", "egrep", "cut", "sort", "xz", "md5sum", "md5", "sha1sum", "shasum", "shasum5.16", "shasum5.18", "sha224sum", "sha256sum", "sha384sum", "sha512sum","perl5.16", "perl5.18", "adb", NULL
 };
 
 static int proc_specifiq_name_cnt;
