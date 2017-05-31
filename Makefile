@@ -8,13 +8,6 @@ ifeq ($(UNAME), Linux)
     ifeq (, $(shell which $(PKG_CONFIG) 2> /dev/null))
     $(error "pkg-config command not found")
     endif
-    ifeq (, $(shell $(PKG_CONFIG) ncurses --libs 2> /dev/null))
-    $(error "ncurses package not found")
-    endif
-    override LDFLAGS += $(shell $(PKG_CONFIG) ncurses --libs)
-endif
-ifeq ($(UNAME), Darwin)
-    override LDFLAGS += -lncurses
 endif
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
